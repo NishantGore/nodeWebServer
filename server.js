@@ -32,6 +32,10 @@ app.get('/ejs', function(req, res){
       Place: 'Pune'
     }
   });
+});
+
+app.get('/projects',function(req, res){
+  res.render('projects');
 })
 
 app.listen(port, function(){
