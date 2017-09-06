@@ -1,24 +1,18 @@
 const express = require('express');
 var app = express();
 const fs = require('fs');
-
+const port = process.env.PORT || 8000;
 app.set('view engine', 'ejs');
 
 app.use(function(req, res, next){
   var date = new Date().toString();
-  var log = `${date}: ${req.method} ${req.url}`;
+  var log = `${date}: ${req.method} ${req.url}`;      //middleware
   console.log(log);
   fs.appendFileSync('logFile.log',log + '\n');
   next();
 });
 
-// app.use(function(req, res, next){
-//   res.send("Site under maintainence");
-// });
-
 app.use(express.static('public'));
-
-
 
 
 app.get('/', function(req, res){
@@ -40,6 +34,6 @@ app.get('/ejs', function(req, res){
   });
 })
 
-app.listen(8000, function(){
-  console.log('Server is on port 8000');
+app.listen(port, function(){
+  console.log(`The server is running on port ${port}`);
 })
